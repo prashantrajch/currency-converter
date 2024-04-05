@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Input from "./Input";
 import Select from "./Select";
 import { CgArrowsExchangeAlt } from "react-icons/cg";
@@ -10,7 +10,11 @@ function Form() {
     toOptionData,
     setFromOptionData,
     setToOptionData,
+    exchangeApiData,
   } = useContext(GlobalContext);
+
+  const [value, setValue] = useState("1");
+  const [amount, setAmount] = useState("1");
 
   function handelExchange() {
     let tempObj = fromOptionData;
@@ -18,9 +22,18 @@ function Form() {
     setToOptionData(tempObj);
   }
 
+  function handleSumbit(e) {
+    e.preventDefault();
+    if (value == 0 || value == "") {
+      setValue("1");
+      setAmount("1");
+    }
+    setAmount(value);
+  }
+
   return (
-    <form className="mt-8 flex flex-col gap-5">
-      <Input />
+    <form className="mt-8 flex flex-col gap-5" onSubmit={handleSumbit}>
+      <Input value={value} setValue={setValue} />
       <div className="flex items-center justify-between gap-3">
         <Select label={"From"} />
         <div className="mt-8 px-2 cursor-pointer" onClick={handelExchange}>
@@ -28,7 +41,16 @@ function Form() {
         </div>
         <Select label={"To"} />
       </div>
-      <button className="p-2 text-lg bg-blue-700 text-white rounded-lg">
+      {!exchangeApiData ? (
+        <p>Getting Data...</p>
+      ) : (
+        <p className="text-xl ">
+          {amount} {exchangeApiData.base_code} = {' '}
+          {amount * exchangeApiData.conversion_rates[toOptionData.curr]} {' '}
+          {toOptionData.curr}
+        </p>
+      )}
+      <button className="p-2 text-lg bg-blue-500 text-white rounded-lg hover:bg-blue-600">
         Get Exchange rate
       </button>
     </form>
