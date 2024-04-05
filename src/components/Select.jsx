@@ -27,7 +27,7 @@ function Select({ label }) {
       >
         {label == "From" ? (
           <div
-            className="flex justify-center items-center gap-2 py-1 cursor-pointer"
+            className="flex justify-center items-center gap-2 py-3 cursor-pointer"
             onClick={handleSelectClick}
           >
             <img
@@ -41,7 +41,7 @@ function Select({ label }) {
           </div>
         ) : (
           <div
-            className="flex justify-center items-center gap-2 py-1 cursor-pointer"
+            className="flex justify-center items-center gap-2 py-3 cursor-pointer"
             onClick={handleSelectClick}
           >
             <img

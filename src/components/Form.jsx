@@ -28,7 +28,9 @@ function Form() {
       setValue("1");
       setAmount("1");
     }
-    setAmount(value);
+    else{
+      setAmount(value);
+    }
   }
 
   return (
