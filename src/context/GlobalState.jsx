@@ -45,7 +45,7 @@ export default function GlobalState({ children }) {
   }, []);
 
   useEffect(() => {
-    // fetchExchangeApi();
+    fetchExchangeApi();
   }, [fromOptionData])
 
   return (
